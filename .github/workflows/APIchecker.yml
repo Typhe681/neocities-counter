@@ -1,0 +1,33 @@
+name: Update Neocities Counter
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # runs every 5 minutes
+  workflow_dispatch:         # allows manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Fetch Neocities info
+        run: |
+          curl -s "https://neocities.org/api/info?sitename=typhe" -o data.json
+          python3 - << 'EOF'
+import json
+with open("data.json") as f:
+    info = json.load(f)
+with open("views.json", "w") as f:
+    json.dump({"info": {"views": info["info"]["views"]}}, f)
+EOF
+
+      - name: Commit and push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add views.json
+          git commit -m "Update views.json" || echo "No changes"
+          git push
