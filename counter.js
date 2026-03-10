@@ -1,8 +1,6 @@
 // URL ?user=
 const params = new URLSearchParams(window.location.search);
 const sitename = params.get("user");
-
-const digitPath = "/";
 const digitsLength = 7; 
 
 async function loadCounter() {
@@ -19,7 +17,7 @@ async function loadCounter() {
 
     digits.forEach(d => {
       const img = document.createElement("img");
-      img.src = digitPath + d + ".gif";
+      img.src = d + ".gif";
       counter.appendChild(img);
     });
 
