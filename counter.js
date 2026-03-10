@@ -17,7 +17,7 @@ async function loadCounter() {
 
     digits.forEach(d => {
       const img = document.createElement("img");
-      img.src = d + ".gif";
+      img.src = d + ".gif?" + Date.now();
       counter.appendChild(img);
     });
 
