@@ -1,5 +1,3 @@
-const params = new URLSearchParams(window.location.search);
-const digitWidth = params.get("width");
 const digitsLength = 7; 
 
 async function loadCounter() {
@@ -17,7 +15,7 @@ async function loadCounter() {
     digits.forEach(d => {
       const img = document.createElement("img");
       img.src = d + ".gif?" + Date.now();
-      img.width = digitWidth;
+      img.width = "calc(100% / 7)";
       counter.appendChild(img);
     });
 
