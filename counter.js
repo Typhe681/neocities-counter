@@ -7,12 +7,11 @@ async function loadCounter() {
     );
     const data = await res.json();
     const views = data.info.views;
-    counter.innerHTML = "views: " + views + "<br>";
 
     const digits = views.toString().padStart(digitsLength,"0").split("");
     const counter = document.getElementById("counter");
-    counter.innerHTML = "";
-
+    counter.innerHTML = "views: " + views + "<br>";
+    
     digits.forEach(d => {
       const img = document.createElement("img");
       img.src = d + ".gif?" + Date.now();
